@@ -1,0 +1,22 @@
+CREATE TABLE products (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  rfid_tag VARCHAR(50) UNIQUE,
+  name VARCHAR(100),
+  price DECIMAL(10,2)
+);
+
+CREATE TABLE invoices (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_name VARCHAR(100),
+  total_amount DECIMAL(10,2),
+  timestamp DATETIME
+);
+
+CREATE TABLE invoice_items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  invoice_id INT,
+  product_id INT,
+  quantity INT,
+  FOREIGN KEY (invoice_id) REFERENCES invoices(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
